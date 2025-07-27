@@ -1,0 +1,12 @@
+# Ignore specific files
+data/Loinc_2.80.zip
+cdss.db
+cdss.db-journal
+Mini-Project*
+*tmp_backup*
+
+# Ignore an entire folder
+venv/
+__pycache__/
+data/loinc_extracted/
+tests/
