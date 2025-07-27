@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<abstraction name="WBC_Level" loinc="26464-8">
+  
+<condition>
+    <persistence good-before="0h" good-after="24h" />
+
+    <rule value="Low" min="0" max="4000" />
+    <rule value="Medium" min="4000" max="10000" />
+    <rule value="High" min="10000" />
+</condition>
+
+</abstraction>

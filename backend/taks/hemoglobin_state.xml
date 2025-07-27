@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<abstraction name="Hemoglobin_Level" loinc="30313-1">
+  
+  <condition sex="Male">
+    <persistence good-before="0h" good-after="24h"/>
+
+    <rule value="Severe Anemia" min="0" max="8" />
+    <rule value="Moderate Anemia" min="8" max="10" />
+    <rule value="Mild Anemia" min="10" max="12" />
+    <rule value="Normal Hemoglobin" min="12" max="14" />
+    <rule value="Polycythemia" min="14" />
+  </condition>
+
+  <condition sex="Female">
+    <persistence good-before="1h" good-after="24h" />
+
+    <rule value="Severe Anemia" min="0" max="9" />
+    <rule value="Moderate Anemia" min="9" max="11" />
+    <rule value="Mild Anemia" min="11" max="13" />
+    <rule value="Normal Hemoglobin" min="13" max="16" />
+    <rule value="Polycythemia" min="16" />
+  </condition>
+
+</abstraction>
