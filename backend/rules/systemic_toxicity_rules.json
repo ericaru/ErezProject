@@ -1,0 +1,29 @@
+{
+  "rule_name": "systemic_toxicity",
+  "description": "4:1 Maximal OR table for Systemic Toxicity",
+  "logic_type": "MAX_OR",
+  "grade_mappings": {
+    "Fever_Level": {
+      "Normal-Elevated": [1],
+      "High": [2],
+      "Very High": [3, 4]
+    },
+    "Chills": {
+      "None": [1],
+      "Shaking": [2],
+      "Rigor": [3, 4]
+    },
+    "Skin-Look": {
+      "Erythema": [1],
+      "Vesiculation": [2],
+      "Desquamation": [3],
+      "Exfoliation": [4]
+    },
+    "Allergic-State": {
+      "Edema": [1],
+      "Bronchospasm": [2],
+      "Sever-Bronchospasm": [3],
+      "Anaphylactic-Shock": [4]
+    }
+  }
+}
