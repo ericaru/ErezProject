@@ -1,0 +1,32 @@
+{
+  "rule_name": "systemic_toxicity",
+  "description": "4:1 Table Lookup for Systemic Toxicity - exact column match from clinical protocol",
+  "logic_type": "TABLE_LOOKUP",
+  "input_parameters": ["fever_level", "chills", "skin_look", "allergic_state"],
+  "lookup_table": {
+    "GRADE I": {
+      "fever_level": ["Normal-Elevated"],
+      "chills": ["None"],
+      "skin_look": ["Erythema"],
+      "allergic_state": ["Edema"]
+    },
+    "GRADE II": {
+      "fever_level": ["High"],
+      "chills": ["Shaking"],
+      "skin_look": ["Vesiculation"],
+      "allergic_state": ["Bronchospasm"]
+    },
+    "GRADE III": {
+      "fever_level": ["Very High"],
+      "chills": ["Rigor"],
+      "skin_look": ["Desquamation"],
+      "allergic_state": ["Sever-Bronchospasm"]
+    },
+    "GRADE IV": {
+      "fever_level": ["Very High"],
+      "chills": ["Rigor"],
+      "skin_look": ["Exfoliation"],
+      "allergic_state": ["Anaphylactic-Shock"]
+    }
+  },
+}
