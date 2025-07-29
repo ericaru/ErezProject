@@ -38,6 +38,7 @@ GET_LOINC_BY_COMPONENT_FM_QUERY = os.path.join(PROJECT_ROOT, 'backend', 'queries
 GET_LOINC_ALLOWED_VALUES = os.path.join(PROJECT_ROOT, 'backend', 'queries', 'get_loinc_allowed_values.sql') # From LOINC table
 GET_LATEST_VALIDTIME_FOR_DAY_QUERY = os.path.join(PROJECT_ROOT, 'backend', 'queries', 'select_latest_validtime_for_day.sql')
 GET_PATIENT_PARAMS_QUERY = os.path.join(PROJECT_ROOT, 'backend', 'queries', 'get_patient_params.sql')
+GET_LATEST_ABSTRACTED_VALUE_QUERY = os.path.join(PROJECT_ROOT, 'backend', 'queries', 'get_latest_abstracted_value.sql')
 
 # TAK Folder
 TAK_FOLDER = os.path.join(PROJECT_ROOT, 'backend', 'taks')
@@ -45,3 +46,5 @@ TAK_FOLDER = os.path.join(PROJECT_ROOT, 'backend', 'taks')
 # rules
 RULES_FOLDER = os.path.join(PROJECT_ROOT, 'backend', 'rules')
 HEMATOLOGICAL_RULES = os.path.join(RULES_FOLDER, 'hematological_rules.json')
+SYSTEMIC_TOXICITY_RULES = os.path.join(RULES_FOLDER, 'toxicity_rules.json')
+TREATMENT_RULES = os.path.join(RULES_FOLDER, 'treatment_rules.json')

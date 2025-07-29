@@ -529,32 +529,63 @@ class PatientRecord:
         return valid_start_time # returning the actual record deleted for logging on screen
 
     @staticmethod
-    def get_hematological_analysis(patient_id, snapshot_date=None):
+    def analyze_patient_clinical_state(patient_id, snapshot_date=None):
         """
-        Get hematological state analysis for a specific patient using JSON rules.
+        Wrapper function that performs comprehensive clinical analysis for a single patient.
 
-        Args:
-            patient_id (str): Patient identifier
-            snapshot_date (str, optional): Snapshot date for analysis
-
-        Returns:
-            dict: Hematological analysis results
+        This function validates input, runs temporal abstraction, and performs both
+        hematological and systemic toxicity analyses for the specified patient.
         """
-        # Verify input
+        # Verify and validate input
         if not patient_id:
             raise ValueError("Patient ID must be provided and cannot be empty.")
 
-        # Input cleanup
+        # Input cleanup and validation
         patient_id = str(patient_id).strip()
+        validate_patient_id(patient_id)
 
-        # Input validation
+        # Handle snapshot_date: use current time if not provided, validate if provided
+        current_time = datetime.now()
+        if not snapshot_date:
+            snapshot_date = current_time.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            snapshot_date = str(snapshot_date).strip()
+            snapshot_dt = validate_datetime(snapshot_date)
+            if snapshot_dt > current_time:
+                raise ValueError("Snapshot date cannot be in the future.")
+            snapshot_date = snapshot_dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        # Check if patient exists
         if not data.check_record(CHECK_PATIENT_BY_ID_QUERY, (patient_id,)):
             raise PatientNotFound("Patient not found")
 
-        # Run hematological analysis using JSON-based rule engine
-        engine = SimpleRuleEngine()
-        return engine.analyze_patient_hematological_state(patient_id, snapshot_date)
+        # Run temporal abstraction for all patients at the snapshot date
+        abstract_data(snapshot_date)
 
+        # Initialize SimpleRuleEngine
+        engine = SimpleRuleEngine()
+
+        # Perform both analyses for the patient
+        hematological_analysis = engine.analyze_patient_hematological_state(patient_id)
+        systemic_toxicity_analysis = engine.analyze_patient_systemic_toxicity(patient_id)
+
+        # Get patient gender for treatment analysis
+        patient_gender = data.get_attr(GET_PATIENT_PARAMS_QUERY, (patient_id,))
+
+        # Perform treatment analysis
+        treatment_analysis = engine.analyze_treatment(
+            patient_id, patient_gender, hematological_analysis, systemic_toxicity_analysis
+        )
+
+        # Return comprehensive results
+        return {
+            'patient_id': patient_id,
+            'snapshot_date': snapshot_date,
+            'hematological_analysis': hematological_analysis,
+            'systemic_toxicity_analysis': systemic_toxicity_analysis,
+            'treatment_analysis': treatment_analysis,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
 
 def abstract_data(snapshot_date):
     """

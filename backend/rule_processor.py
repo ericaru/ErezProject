@@ -46,21 +46,3 @@ class RuleProcessor:
         return rule_data["rules"].get(key, None)
 
 
-if __name__ == "__main__":
-    # Test the rule processor
-    processor = RuleProcessor()
-
-    # Test hematological rules
-    test_input = {
-        "hemoglobin_state": "Severe Anemia",
-        "wbc_level": "Low"
-    }
-
-    try:
-        from backend.backend_config import HEMATOLOGICAL_RULES
-
-        result = processor.apply_rule(HEMATOLOGICAL_RULES, test_input)
-        print(f"Test input: {test_input}")
-        print(f"Result: {result}")
-    except Exception as e:
-        print(f"Error testing rule processor: {e}")
